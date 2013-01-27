@@ -1,0 +1,696 @@
+/*   
+
+UMMA Custom Mobile
+Drupal sub-theme for Framework 
+by Cathy Fisher
+
+*/
+
+/*   =============================        COLORS        =============================   */
+/*
+
+Header/footer background (with texture): rgba(49, 67, 88, .7) 
+Keypad background (without texture): #334254
+Body background: #fffdf5
+Link: #425973
+Link hover: #4775A3
+Gold highlight: #ffd74e
+
+*/
+
+
+/*   =============================        GLOBAL        =============================   */
+
+html { -webkit-font-smoothing: antialiased; }
+body {
+	position: relative;
+	font-size: 14px;
+	min-height: 500px;	
+	background-color: #c4b599;
+}
+a {
+	color: #425973;
+	-webkit-transition: all ease .5s;
+	-moz-transition: all ease .5s;
+	-o-transition: all ease .5s;
+	-ms-transition: all ease .5s;
+	transition: all ease .5s;
+}
+a:visited {
+	color: #425973;
+}
+a:hover {
+	color: #4775A3;
+}
+h1 {
+	color: #ffd74e;
+	text-shadow: 2px 2px 1px black;
+	font-size: 4em;
+	font-weight: normal;
+	margin: 0;
+	padding: 0;
+	padding-top: .5em;
+	line-height: .75;
+}
+h2 {
+	font-size: 1.7em;
+}
+p:last-child {
+	margin-bottom: 0;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+th {
+	font-weight: bold;
+}
+.pager-previous, .pager-next {
+	font-size: 3em;
+}
+
+
+
+
+/*   =============================        LAYOUT        =============================   */
+
+#container {
+	width: 100%;
+	max-width: 100%;
+	padding: 0;
+	overflow: hidden;
+	position: relative;
+}
+.content-width {
+	width: 860px;
+	max-width: 100%;
+	margin: 0 auto;
+	position: relative;
+}
+
+#keypad-wrapper {
+	background-color: #334254;
+}
+
+body,
+.region-footer,
+.region-header {
+	background-color: rgba(49, 67, 88, .7);
+	background-image: url('beige_paper.png');
+}
+
+.page-body {
+	padding: 20px 30px;
+	overflow: hidden;
+	background-color: #fffdf5;
+}
+
+body.sidebar-first #main {
+	width: 68%;
+}
+body.sidebar-first #sidebar-first {
+	width: 30%;
+	background-color: rgba(0, 0, 0, .08);
+}
+
+
+
+
+/*   =============================        HEADER        =============================   */
+
+#header {
+	padding: 0;
+}
+#header .block, #header p,#header ul {
+	margin: 0;
+}
+.region-header {
+	padding: 20px 0;
+	overflow: hidden;
+	z-index: 10;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	-webkit-box-shadow: 0px 5px 25px rgba(0, 0, 0, .6);
+	box-shadow: 0px 5px 25px rgba(0, 0, 0, .6);
+}
+.header-spacer {
+	height: 75px;
+}
+#header #logo {
+	display: block;
+	width: 150px;
+	height: 30px;
+	margin: 5px 0 0 10px;
+}
+#navigation {
+	height: 150px;
+	overflow: hidden;
+}
+.splash-image img {
+	width: 100%;
+	height: auto;
+	margin-top: -35%;
+}
+.breadcrumb {
+	display: none;
+}
+
+#navigation .page-title { display: block; }
+.page-body .page-title { display: none; }
+
+
+
+
+/*   -----------------------------       Main Menu      -----------------------------   */
+
+#block-system-main-menu {
+	width: 300px;
+	float: left;
+	font-size: 1.2em;
+	margin-top: 3px !important;
+}
+.menu {
+	padding-left: 0;
+}
+#block-system-main-menu h2 {
+	display: none;
+}
+#block-system-main-menu li {
+	display: inline;
+}
+#block-system-main-menu a {
+	display: inline-block;
+	padding: 5px 8px;
+	margin: 0 5px;
+	color: #ffd74e;
+	background-color: rgba(255, 255, 255, 0.1);
+	-webkit-transition: all ease .5s;
+	-moz-transition: all ease .5s;
+	-o-transition: all ease .5s;
+	-ms-transition: all ease .5s;
+	transition: all ease .5s;
+}
+#block-system-main-menu a:hover {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+#block-system-main-menu a.active {
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+
+/*   -----------------------------     Search Form      -----------------------------   */
+
+#block-search-form {
+	width: 200px;
+	position: absolute;
+	right: 40px;
+	top: 10px;
+}
+#block-search-form form {
+	margin: 0;
+}
+input.form-text {
+	width: 125px;
+}
+input.form-submit {
+	padding: 3px 5px;
+	width: 50px;
+	font-size: 8pt;
+}
+
+
+
+
+
+
+/*   =============================       CONTENT       =============================    */
+
+#main > .content {
+	margin-bottom: 2em;
+}
+.node-teaser {
+	border-bottom: 0px solid rgba(0,0,0,.3);
+	padding-bottom: 10px;
+	margin-bottom: 0px;
+}
+.item-list ul {
+	list-style-type: none;
+	padding: 0;
+	background-color: rgba(0,0,0,.05);
+}
+.view-tour-stops {
+	font-size: 1.3em;
+}
+.view-tour-stops tr {
+	background-color: transparent;
+}
+.view-tour-stops td {
+	padding: .5em 0;
+}
+
+
+/*--------------------------------    Fields    --------------------------------*/
+
+.field {
+	padding: 15px 0 0 0;
+}
+.field-collection-view,
+.field-type-field-collection,
+.field-type-image {
+	margin: 0;
+	padding: 0;
+}
+.view-content-selection {
+	font-size: .9em;
+}
+.field-name-field-caption {
+	font-style: italic;
+	font-size: .9em;
+}
+.field-name-field-quote {
+	display: block;
+	background-color: rgba(0,0,0,.05);
+	border-left: 5px solid #FFD74E;
+	padding: 10px;
+	padding-left: 40px;
+	margin: 0 0 10px 0;
+	font-style: italic;
+}
+.field-name-field-tour-audio {
+	display: block;
+	background-color: rgba(49, 67, 88, .7);
+	color: #fffdf5;
+	padding: 30px;
+	border-radius: 5px;
+}
+	.field-name-field-tour-audio a {
+		color: #ffd74e;
+	}
+	.file-icon {
+		display: none;
+	}
+.views-field-field-code {
+	text-align: right;
+	width: 15%;
+	padding-right: 5px;
+}
+
+
+
+
+/*   =============================     PAGE-SPECIFIC    =============================   */
+
+
+/*   -----------------------------      Tours Page      -----------------------------   */
+
+.view-tours-listing .views-row {
+	position: relative;
+	padding: 20px;	
+}
+
+.view-tours-listing .node-teaser {
+	padding: 0;
+}
+
+.view-tours-listing .views-row-even {
+	background-color: rgba(0,0,0,.1);
+}
+
+.view-tours-listing ul.links.inline {
+	display: none;
+}
+
+.view-tours-listing .field-name-field-image {
+	margin: 0;
+	padding: 0;
+	float: left;
+	width: 57%;
+}
+
+.view-tours-listing h2 {
+	margin: 0;
+	padding: 0;
+}
+
+.view-tours-listing h2 a {
+	font-size: 1.3em;
+	text-shadow: 2px 2px 0px black;
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	z-index: 10;
+	display: block;
+	padding: 10px;
+	background-color: rgba(0,0,0,.5);
+	color: #FFD74E;
+}
+
+.view-tours-listing .views-row img {
+	width: 100%;
+	height: auto;
+}
+
+.view-tours-listing .field-name-body {
+	float: right;
+	width: 40%;
+	display: block;
+}
+.view-tours-listing .field-name-body p {
+	margin: 0;
+}
+
+.view-tours-listing #main > .content {
+	margin-bottom: 0;
+}
+
+
+
+
+/*   -----------------------------      Stop Pages      -----------------------------   */
+
+
+
+.stop-page #navigation { display: none; }
+.stop-page .page-body .page-title { 
+	display: block; 
+	padding-bottom: .5em;
+	padding-top: .5em;
+}
+
+.stop-page #block-views-splash-image-stop-splash-img {
+	display: none;
+}
+
+.stop-page .page-body {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	margin: 0;
+}
+
+.stop-page #header #logo {
+	margin-left: 70px;
+}
+
+#block-views-object-info-block-1 {
+	background-color: rgba(148,164,176,.6);
+	padding: 5px 15px;
+	border-radius: 5px;
+	text-shadow: 1px 1px 2px rgba(255,255,255,.4);
+}
+
+.block > h2 {
+	padding: .3em;
+	margin: .5em 0 0em 0;
+	border-bottom: 1px solid #ffd74e;
+}
+
+.object-detail-box h2 {
+	font-weight: normal;
+	font-size: 1.3em;
+	padding-bottom: .3em;
+	margin: 1em 0 0 0;
+}
+
+.object-detail-box .field {
+	padding: 0;
+}
+
+
+/*   -----------------------------      Error Pages     -----------------------------   */
+
+/* Show image banner on 404 error page */
+.page-node-2056 #navigation { display: block; }
+.page-node-2056 .page-body .page-title { display: none; }
+
+
+
+
+
+/*   =============================        SIDEBAR        =============================  */
+
+aside {
+	font-size: .9em;
+}
+	aside .views-row {
+		margin-bottom: 1em;
+	}
+
+.region-sidebar-first {
+	margin: 0px;
+	padding: 15px;
+}
+.region-sidebar-first h2 {
+	margin-top: 0;
+	margin-bottom: .5em;
+}
+#sidebar-first .content {
+	font-size: .8em;
+}
+#sidebar-first .views-field-title-field {
+	font-weight: bold;
+}
+
+
+
+
+/*   =============================        FOOTER        =============================   */
+
+#footer {
+	padding: 0;
+}
+.region-footer {
+	color: #F7F0D5;
+	text-align: center;
+	font-size: .85em;
+	padding: 30px 0 25px;
+}
+.region-footer a {
+	color: #ffd74e;
+}
+.region-footer ul {
+	list-style-type: none;
+	text-align: center;
+}
+.region-footer li {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+
+
+
+
+/*   =============================        SPECIAL        =============================  */
+
+
+/*   -----------------------------        Keypad        -----------------------------   */
+
+#keypad-wrapper {
+	width: 350px;
+	left: 50%;
+	margin-left: -185px;
+	margin-top: 100px;
+	max-width: 95%;
+	z-index: 50;
+	padding: 15px 2.5%;
+	display: block;
+	position: absolute;
+	border-radius: 5px;
+}
+.keypad {
+	height: 200px;
+}
+.keypad-button {
+	vertical-align: middle;
+	text-align: center;
+	font-size: 18px;
+	font-weight: bold;
+	cursor: pointer;
+	color: rgba(0, 0, 0, .5);
+	width: 30%;
+	height: 70px;
+	font-size: 4em;
+	border: 4px solid #334254;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	background-color: rgba(255, 255, 255, 0.3);
+}
+.pressed {
+	background-color: #FFD74E;
+}
+#keypad-display {
+	width: 3em;
+	background-color: white;
+	color: black;
+	font-size: 2.5em;
+	border: 0px solid black;
+	margin: 4px;
+	height: 40px;
+	padding: auto .1em;
+}
+.long-button {
+	font-size: 2em;
+}
+
+
+/* Keypad display controls */
+.key-show-hide, 
+.tour-index-button a {
+	width: 49px;
+	position: absolute;
+	top: -5px;
+	z-index: 20;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: top right;
+	font-size: 0px;
+	height: 45px;
+	-webkit-transition: all ease .5s;
+	-moz-transition: all ease .5s;
+	-o-transition: all ease .5s;
+	-ms-transition: all ease .5s;
+	transition: all ease .5s;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: .5;
+}
+.key-show-hide {
+	right: 10px;
+}
+.tour-index-button a {
+	left: 10px;
+	background-image: url('list.png');
+}
+.key-show-hide:hover, 
+.tour-index-button a:hover {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+.pad {
+	background-image: url('keypad.png');
+}
+.list {
+	background-image: url('list.png');
+}
+.x {
+	background-image: url('X.png');
+}
+.region-header .x {
+	display: none;
+}
+
+
+
+
+
+/*   =============================      RESPONSIVE      =============================   */
+
+
+@media screen and (max-width: 940px) {
+	#container { margin: 0; }
+	#container, .region-header, .region-footer { border-radius: 0px; }
+}
+
+
+@media screen and (min-width: 701px) {
+	#keypad-wrapper {
+		border-radius: 7px;
+		box-shadow: 5px 5px 7px rgba(0,0,0,.5);
+	}
+	.x { top: 0; }
+}
+
+
+@media screen and (max-width: 700px) {
+	#container { width: 100%; }
+	body.sidebar-first #main { width: 67%; }
+	body.sidebar-first #sidebar-first {
+		width: 30%;
+		margin-right: 3%;
+	}
+	h1 { font-size: 3em; }
+	#block-search-form { display: none; }
+	#navigation { height: 100px; }
+	.page-body { padding: 10px; }
+}
+
+@media screen and (max-width: 600px) {
+	
+	body.sidebar-first #main { width: 100%; }
+		#main > .content { padding: 0px; }
+		#sidebar-first { display: none; }
+		
+	.region-header { padding: 10px; }
+		#header #logo { 
+			width: 100% !important;
+			text-align: center;
+			display: inline-block;
+			margin: 0;
+			padding: 0;
+			position: absolute;
+			top: 0;
+		}
+			.stop-page #header #logo { margin-left: 0; }
+		ul.menu { padding: 0;}
+	#block-system-main-menu {
+		width: 100%;
+		text-align: center;
+		margin-top: 40px !important;
+	}
+		#block-system-main-menu ul {
+			text-align: center;
+			margin: 0;
+			padding: 0;
+		}
+			#block-system-main-menu li { display: inline; }
+				#block-system-main-menu a {
+					padding: 3px 5px;
+					margin: 0 3px;
+					color: #ffd74e;
+					background-color: transparent;
+					-webkit-transition: none;
+					-moz-transition: none;
+					-o-transition: none;
+					-ms-transition: none;
+					transition: none;
+				}
+					#block-system-main-menu a.active { background-color: rgba(255, 255, 255, 0.3); }
+	.view-tours-listing .views-row { padding: 0; }
+	.view-tours-listing .field-name-field-image,
+	.view-tours-listing .field-name-body {
+		width: 100%;
+		float: none;
+	}
+	.view-tours-listing h2 a {
+		top: 0px;
+		left: 0px;
+	}
+	.view-tours-listing .views-row-even {
+		background-color: transparent;
+	}
+	.tour-index-button a {
+		top: 7px;
+		left: 5px;
+	}
+	#keypad-wrapper {
+		left: 0;
+		margin: 0;
+	}
+		.region-header .key-show-hide {
+			top: 7px;
+			right: 25px;
+		}
+		#key-show-hide, #block-views-title-block-title-block a { display: block !important; }
+}
+
+
+
+/*   =============================      UTILITIES      =============================    */
+
+.hidden { display: none !important; }
+.ajax-progress-throbber { display: none; }
+/*Hide admin tabs for anonymous users*/
+.not-logged-in .tabs-wrapper, .not-logged-in #tap-export-tourml-form {
+	display: none;
+}
