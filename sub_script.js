@@ -1,11 +1,32 @@
+(function($) {
+  var IS_IOS = /iphone|ipad/i.test(navigator.userAgent);
+  $.fn.nodoubletapzoom = function() {
+    if (IS_IOS)
+      $(this).bind('touchstart', function preventZoom(e) {
+        var t2 = e.timeStamp
+          , t1 = $(this).data('lastTouch') || t2
+          , dt = t2 - t1
+          , fingers = e.originalEvent.touches.length;
+        $(this).data('lastTouch', t2);
+        if (!dt || dt > 500 || fingers > 1) return; // not double-tap
+ 
+        e.preventDefault(); // double tap - prevent the zoom
+        // also synthesize click events we just swallowed up
+        //$(this).trigger('click').trigger('click');
+      });
+  };
+})(jQuery);
+
 $(document).ready(function() {
+	
+	$('.pager').addClass('clearfix');
 
 	MBP.hideUrlBarOnLoad;
 	
 	$('.keypad-button').mousedown(function() { $(this).addClass("pressed"); });
 	$('.keypad-button').mouseup(function() { $(this).removeClass("pressed"); });
 	
-	//$('.keypad-button').nodoubletapzoom();
+	$('.keypad-button').nodoubletapzoom();
 	
 	new MBP.fastButton(document.getElementById('1-button'), function() { 
 		addCode('1');
@@ -67,12 +88,6 @@ $(document).ready(function() {
 			$('.key-show-hide').addClass('x');
 			$('.key-show-hide').removeClass('pad');
 			
-			// Hide the rest of the page's content
-			/*$('#main>.content').addClass('hidden');
-			$('#sidebar-first').addClass('hidden');
-			$('#footer').addClass('hidden');
-			$('#block-views-title-block-title-block').addClass('hidden');*/
-			
 		}
 		else {
 			
@@ -83,14 +98,23 @@ $(document).ready(function() {
 			$('.key-show-hide').addClass('pad');
 			$('.key-show-hide').removeClass('x');
 			
-			// Show the rest of the page's content
-			/*$('#main>.content').removeClass('hidden');
-			$('#sidebar-first').removeClass('hidden');
-			$('#footer').removeClass('hidden');
-			$('#block-views-title-block-title-block').removeClass('hidden');*/
-			
 		}
 	});
+	
+	
+    $(".inter-nav").click(function() {
+        var current_id = $(this).attr('id');
+        new_id = '.level--' + current_id;
+        $('html, body').animate({
+            scrollTop: $(new_id).offset().top
+        }, 1000);
+    });
+    
+    $(".inter-nav-top").click(function() {
+       $('html, body').animate({scrollTop:0}, 1000);
+        return false;
+    });
+	
 });
 
 function addCode(key){ 
@@ -108,20 +132,4 @@ window.addEventListener("load",function() {
     }, 0);
  });
 
-(function($) {
-  var IS_IOS = /iphone|ipad/i.test(navigator.userAgent);
-  $.fn.nodoubletapzoom = function() {
-    if (IS_IOS)
-      $(this).bind('touchstart', function preventZoom(e) {
-        var t2 = e.timeStamp
-          , t1 = $(this).data('lastTouch') || t2
-          , dt = t2 - t1
-          , fingers = e.originalEvent.touches.length;
-        $(this).data('lastTouch', t2);
-        if (!dt || dt > 500 || fingers > 1) return; // not double-tap
- 
-        e.preventDefault(); // double tap - prevent the zoom
-      });
-  };
-})(jQuery);
 	
