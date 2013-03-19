@@ -1,17 +1,13 @@
 name = custommobile
 description = Mobile-enabled sub-theme based on Framework for the TAP site.
 base theme = framework
-screenshot  = screenshot.png
+screenshot  = images/screenshot.png
 favicon = favicon.png
 core = 7.x
 engine = phptemplate
 
-stylesheets[all][] = taf-swissface-l.css
-stylesheets[all][] = sub_style.css
-
-scripts[] = fastclick.js
-scripts[] = helper.js
-scripts[] = sub_script.js
+stylesheets[all][] = css/taf-swissface-l.css
+stylesheets[all][] = css/sub_style.css
 
 regions[header]         = Header
 regions[navigation]     = Navigation

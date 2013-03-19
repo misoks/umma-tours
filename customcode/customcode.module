@@ -1,0 +1,107 @@
+<?php
+
+// Return a particular number to prefix the reference code for each specific content type
+
+function check_content_type($node) {
+	// Resources
+		if ($node->type =='tour_audio_stop') {
+			$prefix = '10';
+		}
+		elseif ($node->type =='geo_stop') {
+			$prefix = '11';
+		}
+		elseif ($node->type =='tour_image_stop') {
+			$prefix = '12';
+		}
+		elseif ($node->type =='information_stop') {
+			$prefix = '13';
+		}
+		elseif ($node->type =='poll_stop') {
+			$prefix = '14';
+		}
+		elseif ($node->type =='website_stop') {
+			$prefix = '15';
+		}
+		elseif ($node->type =='tour_video_stop') {
+			$prefix = '16';
+		}
+	// Resource Sets
+		elseif ($node->type == 'tour_stop_group') {
+			$prefix = '4';
+		}
+	// Objects
+		elseif ($node->type == 'object_info') {
+			$prefix = '7';
+		}
+	// Object Sets
+		elseif ($node->type == 'object_set') {
+			$prefix = '2';
+		}
+	// Tours
+		elseif ($node->type == 'tour') {
+			$prefix = '5';
+		}
+	// Tour Sets
+		elseif ($node->type == 'tour_set') {
+			$prefix = '6';
+		}
+	return $prefix;
+}
+
+// Function for updating a pre-existing node
+function customcode_node_update($node) {
+    $field = field_get_items('node', $node, 'field_unique_code');
+    if ($field) {
+        //Get prefix for this node's content type
+        $prefix = check_content_type($node);
+    
+        //Get the unique auto-increment value for this node
+        $increment = $node->field_unique_code['und'][0]['value'];
+    
+        //Combine the auto-increment value with the prefix and put it into the code field
+        $node->field_code['und'][0]['value'] = $prefix.$increment;
+    
+        field_attach_update('node', $node);
+    }
+}
+
+//Function for creating a new node
+function customcode_node_insert($node) {
+	$field = field_get_items('node', $node, 'field_unique_code');
+	if ($field) {
+        //Get prefix for this node's content type
+        $prefix = check_content_type($node);
+    
+        //Get the unique auto-increment value for this node
+        $increment = $node->field_unique_code['und'][0]['value'];
+    
+        //Combine the auto-increment value with the prefix and put it into the code field
+        $node->field_code['und'][0]['value'] = $prefix.$increment;
+    
+        field_attach_insert('node', $node);
+    }
+}
+/*
+function customcode_taxonomy_term_update($term) {
+	// Galleries
+	if ($term->vid == '5') {
+		$prefix = '3';
+	}
+	else {
+		$prefix = "99";
+	}
+	$increment = $term->field_unique_code['und'][0]['value'];
+    $term->field_code['und'][0]['value'] = $prefix.$increment;
+    field_attach_update('term', $term);
+}
+function customcode_taxonomy_term_insert($term) {
+	if ($term->vid == '5') {
+		$prefix = '3';
+	}
+	else {
+		$prefix = "99";
+	}
+	$increment = $term->field_unique_code['und'][0]['value'];
+    $term->field_code['und'][0]['value'] = $prefix.$increment;
+    field_attach_insert('term', $term);
+}*/

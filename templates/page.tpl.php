@@ -1,30 +1,54 @@
-<div id="keypad-wrapper" class="hidden">
-	<input id="keypad-display"></input><a name="Keypad" class="key-show-hide pad">Keypad</a>
-	<table class="keypad">
-		<tr>
-			<td class="keypad-button" id="1-button">1</td>
-			<td class="keypad-button" id="2-button">2</td>
-			<td class="keypad-button" id="3-button">3</td>
-		</tr>
-		<tr>
-			<td class="keypad-button" id="4-button">4</td>
-			<td class="keypad-button" id="5-button">5</td>
-			<td class="keypad-button" id="6-button">6</td>
-		</tr>
-		<tr>
-			<td class="keypad-button" id="7-button">7</td>
-			<td class="keypad-button" id="8-button">8</td>
-			<td class="keypad-button" id="9-button">9</td>
-		</tr>
-		<tr>
-			<td class="keypad-button long-button" id="clear-button">Clear</td>
-			<td class="keypad-button" id="0-button">0</td>
-			<td class="keypad-button long-button" id="go-button">Go</td>
-		</tr>
-	</table>
-</div>
+<?php
+	if (ISSET($_POST['code'])) {
+		$code = $_POST['code'];
+		$type = $code[0];
+		if ($type == '1') {
+			$sub_type = $code[1];
+			if ($sub_type == '0') {
+				$path = 'resource/audio';
+			}
+			elseif ($sub_type == '1') {
+				$path = 'resource/geographic';
+			}
+			elseif ($sub_type == '2') {
+				$path = 'resource/image';
+			}
+			elseif ($sub_type == '3') {
+				$path = 'resource/information';
+			}
+			elseif ($sub_type == '4') {
+				$path = 'resource/poll';
+			}
+			elseif ($sub_type == '5') {
+				$path = 'resource/website';
+			}
+			elseif ($sub_type == '6') {
+				$path = 'resource/video';
+			}
+		}
+		elseif ($type == '2') {
+			$path = 'object-set';
+		}
+		elseif ($type == '3') {
+			$path = 'galleries';
+		}
+		elseif ($type == '4') {
+			$path = 'resource-set';
+		}
+		elseif ($type == '5') {
+			$path = 'tours';
+		}
+		elseif ($type == '6') {
+			$path = 'tour-set';
+		}
+		elseif ($type == '7') {
+			$path = 'object';
+		}
+		header( "Location: http://tap.ummaintra.net/$path/$code" ) ;
+	}
+?>
 
-<div id="container" class="clearfix">
+<div id="container" class="clearfix body-container">
 
   <div id="skip-link">
     <a href="#main-content" class="element-invisible element-focusable"><?php print t('Skip to main content'); ?></a>
@@ -33,15 +57,16 @@
     <?php endif; ?>
   </div>
 
-  <header id="header" role="banner" class="clearfix">
+  <header id="header" role="banner" class="header-region clearfix">
 	
 	<div class="region region-header">
 		<div class="content-width">
-			<?php if ($logo): ?>
-			  <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" id="logo">
-				<img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />
+			<span id="logo" class="main-logo">
+			  <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+				<img src="/sites/all/themes/custommobile/images/logo.svg" alt="UMMA Tours">
+				<!--<img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />-->
 			  </a>
-			<?php endif; ?>
+			  </span>
 			<?php if ($site_name || $site_slogan): ?>
 			  <hgroup id="site-name-slogan">
 				<?php if ($site_name): ?>
@@ -55,16 +80,32 @@
 			  </hgroup>
 			<?php endif; ?>
     		<?php print render($page['header']); ?>
-    		<a class="key-show-hide pad" name="Keypad">Keypad</a>
+    		<img class="show-hide show-hide--menu list collapsed" alt="Show Main Menu" title="Show Main Menu" src="/sites/all/themes/custommobile/images/dot.gif">
+    		<img class="show-hide show-hide--code pad collapsed" alt="Show Stop Code Field" title="Show Stop Code Field" src="/sites/all/themes/custommobile/images/dot.gif">
 		</div>
 	</div>
+	    
 	<div class="header-spacer"></div>
-
+	<div id="keypad-wrapper" class="keypad-wrapper content-width hidden">
+		<form method="post" class="keypad-form">
+			<!--<a name="Keypad" class="key-show-hide pad">Keypad</a>-->
+			<input class="keypad-display" type="number" pattern="[0-9]*" name="code"/></input>
+			<input type="submit" value="Go" class="code-submit">
+		</form>
+	</div>
     <?php if ($main_menu || $secondary_menu || !empty($page['navigation'])): ?>
-      <nav id="navigation" role="navigation" class="clearfix">
+      <nav id="navigation" role="navigation" class="nav-region clearfix">
+
+      
         <?php if (!empty($page['navigation'])): ?> <!--if block in navigation region, override $main_menu and $secondary_menu-->
           <?php print render($title_prefix); ?>
-    		<?php if ($title): ?><h1 class="page-title content-width"><?php print $title; ?></h1><?php endif; ?>
+    		<?php if ($title): ?>
+				<table>
+					<tr><td class="nav-title-container content-width">
+						<h1 class="page-title"><?php print $title; ?></h1>
+					</td></tr>
+				</table>
+    		<?php endif; ?>
    		 <?php print render($title_suffix); ?>
           <?php print render($page['navigation']); ?>
         <?php endif; ?>
@@ -102,11 +143,15 @@
 <div class="page-body">
 	<div class="content-width">
 	<?php print render($title_prefix); ?>
-    		<?php if ($title): ?><h1 class="page-title content-width"><?php print $title; ?></h1><?php endif; ?>
+    		<?php if ($title): ?>
+    			<table class="page-title">
+    				<tr><td class="title-icon-cell"><img src="/sites/all/themes/custommobile/images/dot.gif" class="sprite sprite--stop-type--l"></td>
+    				<td class="title-cell"><h1 class="page-title__resource-title"><?php print $title; ?></h1></td></tr>
+    			</table>
+    		<?php endif; ?>
    	<?php print render($title_suffix); ?>
-  <section id="main" role="main" class="clearfix">
+  <section id="main" role="main" class="clearfix main-content">
     <?php print $messages; ?>
-    <a id="main-content"></a>
     <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
     <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
     <?php print render($page['help']); ?>
@@ -115,19 +160,19 @@
   </section> <!-- /#main -->
   
   <?php if ($page['sidebar_first']): ?>
-    <aside id="sidebar-first" role="complementary" class="sidebar clearfix">
+    <aside id="sidebar-first" role="complementary" class="sidebar left-sidebar clearfix">
       <?php print render($page['sidebar_first']); ?>
     </aside>  <!-- /#sidebar-first -->
   <?php endif; ?>
 
   <?php if ($page['sidebar_second']): ?>
-    <aside id="sidebar-second" role="complementary" class="sidebar clearfix">
+    <aside id="sidebar-second" role="complementary" class="sidebar right-sidebar clearfix">
       <?php print render($page['sidebar_second']); ?>
     </aside>  <!-- /#sidebar-second -->
   <?php endif; ?>
   </div>
 </div>
-  <footer id="footer" role="contentinfo" class="clearfix">
+  <footer id="footer" role="contentinfo" class="page-footer clearfix">
     <?php print render($page['footer']) ?>
     <?php print $feed_icons ?>
   </footer> <!-- /#footer -->

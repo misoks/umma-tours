@@ -8,9 +8,13 @@
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
   <title><?php print $head_title; ?></title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
   <?php print $styles; ?>
-  <?php print $scripts; ?>
+
+	<?php print $scripts; ?>
+	<script src="http://code.jquery.com/jquery.min.js"></script>
+	<script type="text/javascript" src="http://tap.ummaintra.net/sites/all/themes/custommobile/js/fastclick.js"></script>
+	<script type="text/javascript" src="http://tap.ummaintra.net/sites/all/themes/custommobile/js/helper.js"></script>
+	<script type="text/javascript" src="http://tap.ummaintra.net/sites/all/themes/custommobile/js/sub_script.js"></script>
   <!-- IE Fix for HTML5 Tags -->
   <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -19,8 +23,8 @@
 
 <body class="<?php print $classes; 	
 				$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-				if (false !== strpos($url,'stop')) {
-    				print ' stop-page';
+				if (false !== strpos($url,'resource') OR false !== strpos($url,'stop')) {
+    				print ' resource-page';
     			} 
     ?>" <?php print $attributes;?>>
   <?php print $page_top; ?>

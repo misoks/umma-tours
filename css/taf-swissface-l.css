@@ -44,7 +44,7 @@ p {margin-bottom:0;hyphenate: auto;hyphenate-before:2;hyphenate-after:3;hyphenat
 .superscript{font-family:arial, sans-serif;vertical-align:super;font-size:75%;text-transform:lowercase;font-variant:small-caps;letter-spacing:.1em;line-height:0em;}
 .subscript{font-family:arial, sans-serif;vertical-align:sub;font-size:75%;text-transform:lowercase;font-variant:small-caps;letter-spacing:.1em;line-height:0em;}
 a.superscript, a.subscript{text-decoration:none;}
-aside, .sidenote{font-size:.83em;font-style:italic;margin-top:1.95em;}
+aside, .sidenote{font-style:italic;margin-top:1.95em;}
 aside h1, .sidenote h1{text-transform:uppercase;margin:0;font-size:1em;line-height:1.85em;font-style:italic;font-weight:bold;}
 aside p, .sidenote p{line-height:1.85em;margin:0;}
 aside p + p, .sidenote p + p{margin:1.85em 0;}
