@@ -1,4 +1,7 @@
 name=Custom Code
-description="Generates particular reference codes for various content types based on auto-increment."
+description="Handles reference code generation and object location mapping."
 core=7.x
-package=Cathy
+package=UMMA
+
+files[] = customcode.install
+files[] = customcode.module

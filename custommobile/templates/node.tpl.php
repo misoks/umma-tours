@@ -24,13 +24,14 @@
 	<?php endif; ?>
   <?php endif; ?>
 
-  <div class="content"<?php print $content_attributes; ?>>
+  <div class="content node-content"<?php print $content_attributes; ?>>
     <?php
       // Hide comments, tags, and links now so that we can render them later.
       hide($content['comments']);
       hide($content['links']);
       hide($content['field_tags']);
-      print render($content);
+	  print render($content);
+	  
     ?>
   </div>
 

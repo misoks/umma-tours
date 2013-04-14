@@ -1,0 +1,1595 @@
+/*   
+
+UMMA Custom Mobile
+Drupal sub-theme for Framework 
+by Cathy Fisher
+
+*/
+
+/*   =============================        COLORS        =============================   */
+/*
+
+Header/footer background (with texture): rgba(49, 67, 88, .7) 
+Keypad background (without texture): #334254
+Body background: #fffdf5
+Link: #441926
+Link hover: #4775A3
+#D6DE23 highlight: #D6DF23
+
+*/
+
+
+/*   =============================        GLOBAL        =============================   */
+
+html { -webkit-font-smoothing: antialiased; }
+body {
+	position: relative;
+	font-size: 14px;
+	min-height: 500px;	
+	color: black;
+}
+a {
+	color: #441926;
+	-webkit-transition: all .5s;
+	-moz-transition: all .5s;
+	-o-transition: all .5s;
+	-ms-transition: all .5s;
+	transition: all .5s;
+}
+a:visited {
+	color: #441926;
+}
+a:hover {
+	color: #750628;
+}
+h1, h2, h3, h4, h5 {
+	font-weight: bold;
+	font-family: 'Arial Narrow', Arial, sans-serif;
+}
+.title-table {
+	margin: 0 0 5px;
+	height: 75px;
+}
+	.node-type-tour .title-table,
+	.node-type-tour-stop-group .title-table {
+
+	}
+	.node-type-tour h1,
+	.node-type-tour-stop-group h1 {
+		color: rgb(243, 243, 243);
+		text-shadow: 1px 1px 3px black;
+	}
+.resource-page h1,
+.node-type-object-info h1 {
+	text-align: left;
+}
+h1 {
+	font-size: 3em;
+	color: #5A5B5B;
+	font-weight: bold;
+	text-shadow: 2px 2px 3px white;
+	line-height: 1;
+	vertical-align: bottom;
+	margin-top: 0;
+	text-align: center;
+}
+h2 {
+	font-size: 1.2em;
+	text-transform: uppercase;
+	text-align: center;
+	font-family: Helvetica, sans-serif;
+}
+h3 {
+	font-size: 1.3em;
+}
+p:last-child {
+	margin-bottom: 0;
+}
+img {
+	max-width: 100%;
+	height: auto;
+}
+iframe {
+	width: 100%;
+	height: 360px;
+}
+th {
+	font-weight: bold;
+}
+strong {
+	font-weight: bold;
+}
+em { 
+	font-style: italic;
+}
+
+.item-list .pager {
+	font-size: 2em;
+	margin-top: 30px;
+}
+.pager {
+	display: block;
+	width: 100%;
+	position: relative;
+	height: 30px;
+}
+.tour-list .pager-previous a,
+.tour-list .pager-next a,
+.object-details-block .pager-previous a,
+.object-details-block .pager-next a {
+	display: inline-block;
+	background-color: rgba(0,0,0,.1);
+	width: 30%;
+	padding: 10px 0 15px;
+	position: absolute;
+	top: -.35em;
+	font-size: 1.5em;
+	transition: all .5s;
+}
+.pager .pager-previous a:hover,
+.pager .pager-next a:hover {
+	background-color: rgba(0,0,0,.3);
+}
+.pager .pager-previous a {
+	left: 0;
+}
+.pager .pager-next a {
+	right: 0;
+}
+.pager-current {
+	font-size: .5em;
+}
+
+/*   =============================        LAYOUT        =============================   */
+
+.search-box-alt {display: none;}
+
+#container {
+	width: 100%;
+	max-width: 100%;
+	padding: 0;
+	overflow: hidden;
+	position: relative;
+}
+.content-width {
+	width: 960px;
+	max-width: 100%;
+	margin: 0 auto;
+	position: relative;
+}
+
+body,
+.region-footer,
+.region-header {
+	background-color: #231F20;
+}
+
+.page-body {
+	padding: 0px 30px 20px 30px;
+	overflow: hidden;
+	background-color: rgb(243, 243, 243);
+	position: relative;
+}
+
+body.sidebar-first #main {
+	width: 65%;
+}
+body.sidebar-first #sidebar-first {
+	width: 33%;
+	
+}
+.title-icon-cell {
+	display: none;
+}
+.main-content img {
+	box-shadow: 2px 2px 10px rgba(0,0,0,.4);
+}
+
+
+/*   =============================        HEADER        =============================   */
+
+#header {
+	padding: 0;
+	background-color: rgb(243, 243, 243);
+}
+.block-menu, #header p,#header ul {
+	margin: 0;
+}
+.region-header {
+	padding: 10px 0 17px;
+	top: 0;
+	width: 100%;
+	height: 60px;
+	-webkit-box-shadow: 0px 2px 15px rgba(0, 0, 0, .5);
+	box-shadow: 0px 2px 15px rgba(0, 0, 0, .5);
+}
+
+#header #logo {
+	display: block;
+	width: 100%;
+	margin: 0 0 0 65px;
+}
+#logo img {
+	display: inline-block;
+}
+#navigation {
+	position: relative;
+	margin: auto;
+	padding: auto;
+	clear: none; 
+	height: 14px;
+}
+
+.breadcrumb {
+	display: none;
+}
+	.show-hide--menu {
+		left: 10px;
+	}
+
+
+
+
+/*   -----------------------------       Main Menu      -----------------------------   */
+.main-nav-menu {
+	position: absolute;
+	z-index: 10;
+	background-color: black;
+	display: block;
+	top: 0;
+}
+.main-nav-menu .block-title {
+	display: none;
+}
+.main-nav-menu .menu {
+	padding: 0;
+}
+.main-nav-menu .menu .leaf {
+	list-style-type: none;
+	display: inline;
+}
+ul li.expanded {
+	list-style-image: none;
+	list-style-type: none;
+}
+a.menu-link {
+	display: block;
+	color: white;
+	padding: 5px 30px 5px 20px;
+}
+a.menu-link:hover {
+	background-color: #441926;
+}
+a.menu-link--parent {
+	background-color: rgb(43, 39, 40);
+	border-bottom: 1px solid rgba(255,255,255,.1);
+	color: white;
+	font-weight: bold;
+}
+a.menu-link--child {
+	padding-left: 40px;
+	background-color: rgb(32, 29, 30);
+}
+li a.active {
+	color: #D6DF23;
+}
+
+/*   -----------------------------     Search Form      -----------------------------   */
+
+#block-search-form {
+	width: 200px;
+	position: absolute;
+	right: 40px;
+	top: 26px;
+}
+#block-search-form form {
+	margin: 0;
+}
+#block-search-form input.form-text {
+	width: 125px;
+}
+#block-search-form input.form-submit {
+	padding: 3px 5px;
+	font-size: 8pt;
+}
+
+.search-advanced .form-item-type-feed,
+.search-advanced .form-item-type-feed-item,
+.search-advanced .form-item-type-page,
+.search-advanced .form-item-type-url-bundle,
+.search-advanced .form-item-type-url-forwarder {
+	display: none;
+}
+
+
+/*   =============================        SIDEBAR        =============================  */
+
+aside {
+	font-size: .9em;
+}
+	aside .views-row {
+		margin-bottom: 1em;
+	}
+	aside h3 {
+		font-weight: bold;
+	}
+
+.sidebar .block {
+	background-color: rgba(0, 0, 0, .08);
+	padding: 15px;
+	margin-bottom: 25px;
+}
+
+.region-sidebar-first {
+	margin: 0px;
+}
+.region-sidebar-first h2 {
+	margin: 1em 0;
+	padding: 0;
+	border-bottom: 0;
+}
+
+#sidebar-first .views-field-title-field {
+	font-weight: bold;
+}
+
+
+
+
+
+/*   =============================       CONTENT       =============================    */
+
+
+.highlighted {
+	position: relative;
+}
+	.splash-image {
+		text-align: center;
+	}
+	.node-type-stop .splash-image {
+		background-color: transparent;
+	}
+	.splash-image img {
+		width: 960px;
+		height: auto;
+		min-width: 600px;
+	}
+.node-teaser {
+	border-bottom: 0px solid rgba(0,0,0,.3);
+	padding-bottom: 10px;
+	margin-bottom: 0px;
+}
+.item-list ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.block-title {
+	padding: .3em;
+	margin: .5em 0 0em 0;
+	border-bottom: 1px solid #D6DF23;
+}
+
+
+
+/*   -----------------------------        Icons         -----------------------------   */
+
+
+.sprite {
+	background-image:url('../images/main.svg');
+}
+
+.sprite--umma-dialogues {
+	height: 42px;
+	width: 250px;
+	background-position: -3px 99px;
+	background-size: 370px;
+	margin-bottom: 7px;
+}
+.sprite--many-voices {
+	height: 58px;
+	width: 273px;
+	background-position: -2px 59px;
+	background-size: 375px;
+	margin-top: 5px;
+}
+.sprite--stop-type {
+	font-size: 0;
+	color: transparent;
+	position: absolute;
+	width: 51px;
+    height: 50px;
+    display: block;
+    z-index:0;
+}
+
+.small-sprite .sprite--stop-type {
+	height: 30px;
+	width: 31px;
+	top: 50%;
+	left: 0;
+	margin-top: -15px;
+	background-position: -233px 0px;
+	background-size: 334px;
+}
+	.small-sprite .Resource---Audio { background-position: -69px 0px; }
+	.small-sprite .Resource---Video { background-position: -3px 0px; }
+	.small-sprite .Resource---Image { background-position: -167px 0px; }
+	.small-sprite .Resource---Information { background-position: -134px 0px; }
+	.small-sprite .Resource---Poll { background-position: -101px 0px; }
+	.small-sprite .Resource---Geographic { background-position: -36px 0px; }
+	.small-sprite .Resource---Website { background-position: -200px 0px; }
+
+
+.medium-sprite .sprite--stop-type {
+	position: absolute;
+	left: -5px; 
+	top: 0;
+	height: 50px;
+	width: 51px;
+	background-position: -389px 0px;
+}	
+	.medium-sprite .Resource---Audio  { background-position: -115px 0px; }
+	.medium-sprite .Resource---Video  { background-position: -5px 0px; }
+	.medium-sprite .Resource---Image   { background-position: -279px 0px; }
+	.medium-sprite .Resource---Information  { background-position: -225px 0px; }
+	.medium-sprite .Resource---Poll { background-position: -170px 0px; }
+	.medium-sprite .Resource---Geographic  { background-position: -60px 0px; }
+	.medium-sprite .Resource---Website { background-position: -334px 0px; }
+
+.sprite--stop-type--l {
+	height: 61px;
+	width: 65px;
+	margin-top: 8px;
+	background-size: 675px;
+}
+	.node-type-tour-audio-stop .sprite--stop-type--l { background-position: -137px 0px; }
+	.node-type-tour-video-stop .sprite--stop-type--l { background-position: -6px 0px; }
+	.node-type-tour-image-stop .sprite--stop-type--l { background-position: -335px 0px; }
+	.node-type-information-stop .sprite--stop-type--l { background-position: -269px 0px; }
+	.node-type-poll-stop .sprite--stop-type--l { background-position: -203px 0px; }
+	.node-type-geo-stop .sprite--stop-type--l { background-position: -72px 0px; }
+	.node-type-website-stop .sprite--stop-type--l { background-position: -401px 0px; }
+	.node-type-object-info .sprite--stop-type--l { background-position: -467px 0px; }
+
+
+.title-icon-cell img {
+	box-shadow: none;
+}
+
+
+
+/*   -----------------------------        Fields        -----------------------------   */
+
+
+.page-node- .field-collection-view,
+.page-node- .field-type-field-collection,
+.page-node- .field-type-image {
+	margin: 0;
+	padding: 0;
+}
+.page-node- .field-type-image {
+	text-align: center;
+}
+.view-content-selection {
+	font-size: .9em;
+}
+.page-node- .field-name-field-caption {
+	font-style: italic;
+	font-size: .9em;
+}
+.page-node- .field-name-field-quote {
+	display: block;
+	background-color: rgba(0,0,0,.05);
+	border-left: 5px solid #D6DF23;
+	padding: 10px;
+	padding-left: 40px;
+	margin: 0 0 10px 0;
+	font-style: italic;
+}
+
+.page-node- .field-name-field-physical-description {
+	margin: 1em 0;
+	font-size: .85em;
+	line-height: 1.5;
+	font-style: italic;
+	color: rgba(0,0,0,.9);
+	text-align: center;
+}
+.page-node- .field-name-field-subject-matter {
+	margin-bottom: 1em;
+}
+
+.file-icon {
+	display: none;
+}
+div.jp-interface,
+div.jp-playlist {
+	border: 0;
+}
+div.jp-audio {
+	margin: 0 auto;
+	width: 400px;
+	max-width: 100%;
+	overflow: hidden;
+}
+
+#main .view-tour-resources {
+	margin-top: 2em;
+}
+.page-node- .field-item {
+	position: relative;
+}
+.page-node- .field-name-field-ois-display-artist {
+	font-style: italic;
+	font-size: 1.2em;
+}
+.page-node- .field-type-link-field a,
+.page-node- .field-name-field-tour-audio a,
+.page-node- .file-video a {
+	color: rgba(0,0,0,.3);
+	display: block;
+	width: 100%;
+	padding: 20px 0;
+	margin: 1em 0;
+	text-align: center;
+	font-size: 2em;
+	background-color: #D6DF23;
+	border-radius: 10px;
+	box-shadow: 2px 2px 5px rgba(0,0,0,.2);
+	font-family: "arial narrow";
+	font-weight: bold;
+}
+.node-type-tour-audio-stop .field-type-link-field a:before,
+.page-node- .field-name-field-tour-audio a:before,
+.page-node- .file-video a:before {
+	content: "▶";
+	position: absolute;
+	left: 20px;
+	top: 22px;
+}
+.page-node- .field-type-link-field a:hover,
+.page-node- .field-name-field-tour-audio a:hover,
+.page-node- .file-video a:hover {
+	color: black;
+}
+.page-node- .field-name-body {
+	margin-bottom: 2em
+}
+.page-node- .description {
+	margin: 1em 0;
+	padding: 0;
+	background-color: rgba(0,0,0,.1);
+}
+	.page-node- .description--header a {
+		font-size: .9em;
+		text-transform: uppercase;
+		margin: 0;
+		cursor: pointer;
+		padding: 1em;
+		display: block;
+		position: relative;
+		padding-left: 2.5em;
+	}
+		.page-node- .description--header .open:before,
+		.page-node- .description--header .closed:before {
+			position: absolute;
+			left: 1em;
+			top: 50%;
+			margin-top: -7px;
+			color: black;
+			font-family: courier, monospace;
+		}
+		.page-node- .description--header .open:before {
+			content: "▼";
+		}
+		.page-node- .description--header .closed:before {
+			content: "▶";
+		}
+	.page-node- .description--body {
+		padding: 0 1em 1em 1em;
+	}
+		.page-node- .description--body p {
+			margin: 0;
+		}
+
+
+/*   =============================     PAGE-SPECIFIC    =============================   */
+
+
+/*   -----------------------------      Front Page      -----------------------------   */
+
+.front .title-table {
+	display: none;
+}
+
+.featured-tour {
+	position: relative;
+	background-color: black;
+	overflow: hidden;
+	height: 200px;
+}
+	.featured-tour__title {
+		position: absolute;
+		top: 0;
+		left: 0;
+		font-size: 3.5em;
+		text-transform: none;
+		margin: 0px;
+		padding: 20px;
+		text-shadow: 2px 2px 0 black;
+		text-align: left;
+		font-family: "Arial Narrow", Arial, sans-serif;
+	}
+		.featured-tour__title a {
+			color: rgb(243, 243, 243);
+		}
+	.featured-tour__image {
+		width: 100%;
+		overflow: hidden;
+	}
+		.featured-tour__image img {
+			max-width: none;
+		}
+	.featured-tour__description {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		display: block;
+		width: 97%;
+		color: white;
+		background-color: rgba(0,0,0,.8);
+		font-size: .9em;
+		line-height: 1;
+		padding: 1.5%;
+	}
+		.featured-tour__description p {
+			margin: 0;
+		}
+	
+
+.front .field-name-body {
+	margin: 0;
+}
+
+.front-block {
+	width: 32%;
+	float: left;
+	min-width: 300px;
+}
+	.front-block img {
+		width: 100%;
+		height: 175px;
+		background-color: gray;
+		margin-top: .75em;
+	}
+	.front-block p {
+		margin-top: .75em;
+	}
+	.front-block--explore,
+	.front-block--scan-code {
+		margin-right: 2%;
+	}
+.front-block .block-title {
+	text-transform: none;
+	border: 0;
+	font-size: 2em;
+	text-align: left;
+	padding: 0;
+	font-family: "Arial Narrow", helvetica, sans-serif;
+}
+	.front-block--welcome .block-title {
+		font-size: 3em;
+	}
+	.front-block--welcome {
+		width: 100%;
+	}
+.front-block .kicker {
+	margin-top: .25em;
+	line-height: 1.4;
+	font-size: 1.8em;
+}
+.front-block .kicker a {
+	font-weight: bold;
+}
+.big-link {
+	font-weight: bold;
+	font-size: 1.25em;
+	margin-top: .5em;
+	display: block;
+}
+
+/*   -----------------------------      Tours Page      -----------------------------   */
+
+
+.tour-list ul.links.inline {
+	display: none;
+}
+
+.tour-list-item {
+	position: relative;
+	padding: 0px;
+	margin-bottom: 20px;
+	overflow: hidden;
+	width: 100%;
+	height: 200px;
+}
+	.tour-list-item__image {
+		margin: 0;
+		padding: 0;
+		width: 100%;
+	}
+		.tour-list-item__image img {
+			height: 100%;
+			width: auto;
+			max-width: none;
+			min-width: 100%;
+			transition: all .5s;
+			-moz-transition: all .5s;
+			-webkit-transition: all .5s;
+		}
+		.tour-list-item__image img:hover {
+			opacity: .4;
+		}
+	.tour-list-item__title {
+		margin: 0;
+		padding: 0;
+	}
+		.tour-list-item__title a {
+			text-shadow: 2px 2px 0px black;
+			position: absolute;
+			z-index: 10;
+			display: block;
+			padding: 10px;
+			color: #D6DF23;
+			font-size: 1.5em;
+		}
+	.tour-list-item__description {
+		display: block;
+		font-size: .95em;
+		position: absolute;
+		bottom: 0px;
+		background-color: rgba(0,0,0,.6);
+		color: white;
+	}
+		.tour-list-item__description p {
+			margin: 0;
+			padding: 5px;
+			font-size: 1.1em;
+			line-height: 1.2;
+		}
+		.tour-list-item__description p:after {
+			content: " ...";
+		}
+
+.tour-set {
+	border-bottom: 1px solid rgba(0,0,0,.3);
+	padding-bottom: 20px;
+}
+.ref-tours-block {
+	margin-top: 15px;
+}
+.ref-tour {
+	width: 25%;
+	height: 150px;
+	overflow: hidden;
+	float: left;
+	position: relative;
+}
+.ref-tour__title {
+	margin: 0;
+}
+.ref-tour__title a {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 10;
+	display: block;
+	background-color: transparent;
+	color: transparent;
+	padding: 10px 0 0 10px;
+}
+.ref-tour__title a:hover {
+	background-color: rgba(0,0,0,.5);
+	color: #D6DF23;
+}
+.ref-tour__image img {
+	min-height: 150px;
+	max-width: none;
+}
+
+.docent-tours .form-select {
+	width: 300px;
+	font-size: 1.1em;
+}
+
+
+/*   -----------------------------      Tour Pages      -----------------------------   */
+
+/* Custom icons for each stop type */
+
+.tour-resource {
+	position: relative;
+}
+
+	.tour-resource--page {
+		margin: 20px 0 20px 0;
+		display: block;
+		box-sizing: border-box;
+	}
+	
+	.tour-resource__image {
+		top: 50%;
+		margin-top: -25px;
+		left: 10px;
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		display: block;
+		overflow: hidden;
+		border-radius: 25px;
+		background-color: #D6DF23;
+	}
+	
+	.tour-resource__title {
+		font-weight: bold;
+		margin: 0;
+		display: block;
+	}
+	.tour-resource--page .tour-resource__title a {
+		display: block;
+		z-index: 5;
+		background-color: rgba(0,0,0,.1);
+		border-radius: 15px;
+		padding: 20px;
+		padding-left: 70px;
+		text-shadow: 1px 1px 2px white;
+	}
+	.tour-resource__object-location {
+		margin-top: 2em;
+	}
+	.tour-resource--page .tour-resource__title a:hover {
+		background-color: rgba(0,0,0,.2);
+	}
+	.tour-resource--page .tour-resource--page__stop-type {
+		top: 50%;
+		margin-top: -25px;
+		left: 10px;
+		position: absolute;
+		width: 50px;
+		height: 50px;
+		display: block;
+	}
+	.node-type-tour .title-table,
+	.node-type-tour-stop-group .title-table {
+		margin-top: 15px;
+		margin-bottom: 60px;
+	}
+
+
+
+/*   -----------------------------     Object Pages     -----------------------------   */
+
+.artist-info__image {
+	text-align: center;
+}
+.artist-info__description {
+	margin-top: 1em;
+}
+	.artist-info__description p {
+		line-height: 1.5;
+		font-size: 9pt;
+		font-style: normal;
+	}
+
+.field-name-field-ois-classification-1,
+.field-name-field-ois-classification-1 div,
+.field-name-field-ois-object-type-1,
+.field-name-field-ois-object-type-1 div,
+.field-name-field-ois-medium,
+.field-name-field-ois-medium div {
+	display: inline;
+	font-style: italic;
+}
+
+.field-name-field-ois-classification-1:after,
+.field-name-field-ois-object-type-1:after {
+	content: " > ";
+}
+.field-name-field-artist {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+.field-name-field-copyright .field-item:before {
+	content: '© ';
+}
+.field-name-field-ois-full-title {
+	font-style: italic;
+}
+.field-name-field-ois-creation-date-text {
+	margin-bottom: 1em;
+}
+.field-name-field-credit-line,
+.field-name-field-ois-accession-number,
+.field-name-field-copyright {
+	margin-top: 1em;
+}
+
+.object-map {
+	margin-top: 20px;
+}
+
+
+/*   -----------------------------      Stop Pages      -----------------------------   */
+
+.title-icon-cell {
+	width: 67px;
+}
+.title-cell {
+	vertical-align: middle;
+	line-height: 1;
+}
+.resource-page .title-cell {
+	vertical-align: middle;
+}
+.resource-page .page-title {
+	margin-top: 0;
+}
+.resource-page .page-body {
+	-webkit-box-shadow: none;
+	box-shadow: none;
+	margin: 0;
+}
+.resource-page .title-icon-cell,
+.node-type-object-info .title-icon-cell {
+	display: table-cell;
+	width: 75px;
+}
+
+.sidebar .object-details-block,
+.node-type-object-info .node-content,
+.node-object-info {
+	background-color: rgba(95, 26, 46,.5);
+	border-radius: 5px;
+	text-shadow: 1px 1px 2px rgba(255,255,255,.4);
+	padding: 15px;
+}
+.node-object-info h2,
+.object-details-block h2 {
+	font-size: 1.3em;
+	padding-bottom: .3em;
+	margin: 1em 0;
+	font-weight: bold;
+}
+	.object-details__image {
+		text-align: center;
+	}
+	.object-details__title {
+		margin-top: .2em;
+	}
+
+.tour-resource--block {
+	margin: 0;
+	background-color: transparent;
+	padding-left:  35px;
+	margin: 7px 0;
+}
+.stop-listing-block .tour-resource__title a {
+	transition: all ease .5s;
+	-webkit-transition: all ease .5s;
+	display: block;
+	padding: 5px 0 5px 3px;
+	border-left: 3px solid transparent;
+}
+.stop-listing-block .tour-resource__title a.active, 
+.stop-listing-block .tour-resource__title a:hover {
+	color: black;
+	border-left: 3px solid #D6DF23;
+}
+
+.stop-listing-block  {
+	margin: 0;
+}
+
+/*   -----------------------------        Map Page       -----------------------------  */
+
+.level {
+	border-bottom: 1px solid rgba(0,0,0,.5);
+	padding-bottom: 2em;
+	padding-top: .25em;
+}
+	.level__block {
+		width: 49%;
+		float: left;
+		margin-right: 1%;
+		min-height: 200px;
+	}
+		.level__block h3 {
+			margin-bottom: .5em;
+		}
+
+.map-header-nav {
+    margin-bottom: 0;
+}
+    .level-selection {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+        .level-selection li {
+            display: inline;
+            margin-right: 4%;
+        }
+        .level-selection li:last-child {
+            margin-right: 0;
+        }
+            .level-nav {
+                cursor: pointer;
+            }
+                .main-content .level-icon {
+                    width: 65px;
+                    height: 65px;
+                    background-size: 722px;
+                    box-shadow: none;
+                }
+                .level-icon--first-floor {
+                	background-position: 143px 0px;
+                }
+                .level-icon--second-floor {
+                	background-position: 75px 0px;
+                }
+                .level-icon--mezzanine {
+                	background-position: 143px -70px;
+                }
+                .level-icon--lower-level {
+                	background-position: 75px -70px;
+                }
+
+.back-to-top {
+    clear: both;
+    text-align: right;
+}
+    .inter-nav-top {
+        cursor: pointer;
+        font-weight: bold;
+    }
+    .inter-nav-top:after {
+        content: "↑";
+        padding: 0 .5em;
+    }
+
+
+.level-page-nav {
+	list-style-type: none;
+	padding: 0;
+	text-align: center;
+}
+	.level-page-nav li {
+		display: inline;
+		font-size: 1.2em;
+		line-height: 1.5;
+	}
+		.level-page-nav li:after {
+			content: ' - ';
+			padding: 0 5px;
+		}
+		.level-page-nav li:last-child:after {
+			content: '';
+		}
+
+
+/*   ---------------------------    Objects by Gallery    ---------------------------   */
+	
+.objects-by-gallery h3 {
+	border-bottom: 1px solid #D6DE23;
+	padding-bottom: .5em;
+	padding-top: 1em;
+}
+.object-info-item {
+	margin: 1em auto;
+	display: inline-block;
+	width: 30%;
+	margin-right: 1%;
+	padding: .5%;
+}
+.objects-by-gallery .views-row-odd {
+	background-color: rgba(0,0,0,.05);
+}
+	.object-info-item__title {
+		margin-top: .2em;
+	}
+	.object-info-item__image {
+		text-align: center;
+	}
+
+.objects-by-gallery .more-link a {
+	display: block;
+	background-color: rgba(0,0,0,.1);
+	padding: .5em;
+	text-align: center;
+	font-size: 1.5em;
+	color: black;
+	text-shadow: 1px 1px 1px white;
+	margin-top: 1em;
+}
+.objects-by-gallery .more-link a:hover {
+	background-color: rgba(0,0,0,.2);
+}
+
+
+
+/*  -------------------------  Add Content Page for Docents  -------------------------  */
+
+.page-node-add label {
+	font-size: 1.2em;
+	font-weight: bold;
+	text-transform: uppercase;
+	/*padding: 1em 0 .5em;*/
+}
+.page-node-add label.option {
+	font-size: 1em;
+	font-weight: normal;
+	text-transform: none;
+}
+.page-node-add .description {
+	font-style: italic;
+	padding: 5px 25px;
+}
+
+.form-item-field-location-und-553 label.option, 
+.form-item-field-location-und-541 label.option,
+.form-item-field-location-und-536 label.option,
+.form-item-field-location-und-564 label.option {
+	font-weight: bold;
+}
+
+.form-item-field-location-und-553 input, 
+.form-item-field-location-und-541 input,
+.form-item-field-location-und-536 input,
+.form-item-field-location-und-564 input,
+.field-name-field-code,
+.page-node-add .field-name-field-tour {
+	display: none;
+}
+
+/*   -----------------------------      Error Pages     -----------------------------   */
+
+
+
+/*   =============================        FOOTER        =============================   */
+
+#footer {
+	padding: 0;
+}
+.region-footer {
+	color: rgb(243, 243, 243);
+	text-align: center;
+	font-size: .85em;
+	padding: 30px 0 25px;
+}
+.region-footer a {
+	color: #D6DF23;
+}
+
+.docent-menu {
+	width: 300px;
+	max-width: 95%;
+	margin: 0 auto;
+	font-size: 2em;
+	line-height: 1.5;
+	padding: 0;
+}
+	.docent-menu .menu {
+		margin: 0;
+		list-style-type: none;
+		padding: 0;
+	}
+		.docent-menu .menu .leaf { display: block; }
+		.docent-menu .menu .leaf a {
+			display: block;
+			text-align: center;
+			background-color: rgba(255,255,255,.1);
+			margin: 5px 0;
+			padding: 5px;
+		}
+			.docent-menu .menu .leaf a:hover {
+				background-color: rgba(255,255,255,.2);
+			}
+
+
+
+/*   =============================        SPECIAL        =============================  */
+
+
+/*   -----------------------------        Keypad        -----------------------------   */
+
+
+.keypad-wrapper {
+	z-index: 3;
+	transition: all ease 1s;
+	-webkit-transition: all ease 1s;
+}
+.keypad-form {
+	margin: 0;
+	position: absolute;
+	right: 0px;
+	background-color: #D6DF23;
+	padding: 5px 10px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	box-shadow: 2px 2px 5px rgba(0,0,0,.5);
+}
+.keypad-display {
+	font-size: 2em;
+	width: 3.75em;
+	padding: .15em .25em;
+	color: lightgray;
+}
+.keypad-display.clicked {
+	color: black;
+}
+form input[type='number']::-webkit-outer-spin-button,
+form input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.keypad-wrapper input[type="submit"] {
+	display: inline-block;
+	font-size: 1.5em;
+	box-sizing: content-box;
+	vertical-align: top;
+	margin: 5px 0;
+	padding: 5px 7px;
+	background-color: rgb(230, 224, 224);
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+.keypad-label {
+	font-size: 1em;
+	display: inline-block;
+	width: 46px;
+	line-height: 1;
+	margin-top: 11px;
+	font-weight: bold;
+	color: rgba(0,0,0,1);
+	text-shadow: 1px 1px 2px rgba(255,255,255,.5);
+}
+
+/* Keypad display controls */
+.show-hide {
+	width: 49px;
+	position: absolute;
+	top: 15px;
+	z-index: 20;
+	cursor: pointer;
+	background-repeat: no-repeat;
+	background-position: top right;
+	font-size: 0px;
+	height: 45px;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+	filter: alpha(opacity=50);
+	opacity: .5;
+}
+.show-hide--code {
+	right: 10px;
+}
+.show-hide--back {
+	left: 10px;
+	background-image: url('../images/back.svg');
+}
+.show-hide:hover{
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+.pad {
+	background-position: -495px -111px;
+}
+.list {
+	background-position: -456px -111px;
+}
+.x {
+	background-image: url('../images/X.svg');
+}
+
+
+
+/*   -----------------------------         Maps         -----------------------------   */
+
+
+.map {
+	font-family: Helvetica, Arial, sans-serif;
+	width: 100%;
+	min-width: 200px;
+	height: 50%;
+}
+.room__label {
+	fill: black;
+	font-size: 12px;
+}
+.room {
+	fill: rgba(0,0,0,0);
+}
+	.room--project-gallery,
+	.room--new-media,
+	.room--temp_exibit-fw,
+	.room--temp-exhibit-amh,
+	.room--vertical-gallery-3 {
+		fill: rgba(201, 191, 170, .5);
+	}
+	.room--contemporary-art {
+		fill: rgba(213, 213, 0, .6);
+	}
+	.room--chinese-art {
+		fill: rgba(21, 182, 172,.6);
+	}
+	.room--korean-art {
+		fill: rgba(0, 110, 165, .6);
+	}
+	.room--buddhist-art {
+		fill: rgba(155, 8, 77, .6);
+	}
+	.room--south-asian-art {
+		fill: rgba(59, 5, 77, .5);
+	}
+	.room--japanese-art {
+		fill: rgba(0, 108, 168, .5);
+	}
+	.room--african-art {
+		fill: rgba(228, 182, 0, .6);
+	}
+	.room--american-decorative {
+		fill: rgba(163, 81, 0, .6);
+	}
+	.room--european-american,
+	.room--european-american-2 .arched-path {
+		fill: rgba(19, 95, 139, .5);
+	}
+	.room--european-1100 {
+		fill: rgba(150, 125, 0, .6);
+	}
+	.room--european-1650 {
+		fill: rgba(8, 129, 87, .6);
+	}
+g.room:hover {
+	fill: rgba(132, 40, 66,.5);
+}
+.object-map .room,
+.object-map .room--european-american-2 .arched-path {
+	fill: rgba(0,0,0,0);
+}
+
+.object-map__561 .room--european-american,
+.object-map__8680 .room--new-media,
+.object-map__563 .room--european-1650,
+.object-map__562 .room--european-1100,
+.object-map__559 .room--forum,
+.object-map__558 .room--store,
+.object-map__538 .room--vertical-gallery-3, 
+.object-map__556 .room--multi-purpose,
+.object-map__557 .room--project-gallery,
+.object-map__554 .room--commons,
+.object-map__537 .room--contemporary-art,
+.object-map__539 .room--chinese-art,
+.object-map__540 .room--korean-art,
+.object-map__547 .room--room--temp-exhibit-amh,
+.object-map__551 .room--american-decorative,
+.object-map__550 .room--open-storage,
+.object-map__549 .room--european-american-2 .arched-path,
+.object-map__548 .room--conservation_lab,
+.object-map__552 .room--temp_exibit-fw,
+.object-map__546 .room--african-art,
+.object-map__543 .room--buddhist-art,
+.object-map__544 .room--south-asian-art,
+.object-map__545 .room--japanese-art,
+.object-map__565 .room--auditorium,
+.object-map__566 .room--education-center,
+.object-map__567 .room--museum_studies,
+.object-map__568 .room--paper-study,
+.object-map__569 .room--object-study,
+.object-map__570 .room--classroom,
+.object-map__571 .room--crc,
+.object-map__4386 .room--outdoor {
+	fill: rgba(206, 235, 0, .8);
+}
+
+
+
+
+/*   =============================      RESPONSIVE      =============================   */
+
+
+@media screen and (min-width: 621px) {
+
+}
+@media screen and (max-width: 940px) {
+	#container { margin: 0; }
+	#container, .region-header, .region-footer { border-radius: 0px; }
+	.node-type-tour .title-table,
+	.node-type-tour-stop-group .title-table {
+		margin-top: 5px;
+		margin-bottom: 55px;
+	}
+}
+
+@media screen and (max-width: 790px) {
+	#block-search-form { display: none; }
+	/*.search-box-alt {
+		display: block;
+		position: absolute;
+		right: 0;
+		top: -30px;
+	}*/
+	.main-nav-menu .leaf .leaf--search {
+		display: inline;
+	}
+	.title-table {
+		margin-top: 5px;
+	}
+	.search-box-alt form {
+		margin: 0;
+	}
+}
+
+@media screen and (max-width: 720px) {
+	body.sidebar-first #main { width: 100%; float: none; }
+	body.sidebar-first #sidebar-first { width: 100%; float: none; }
+	#container { width: 100%; }
+	h1 { font-size: 3em; }
+		.nav-title-container {
+		height: 100px;
+	}
+	.page-body { padding: 10px; }
+	.object-info-item {
+		margin: .5em auto;
+		display: inline-block;
+		width: 45%;
+		margin-right: 1%;
+		padding: 1%;
+	}
+	.title-table {
+		height: 40px;
+	}
+		.page-title {
+			margin-top: 20px;
+			margin-top: 0;
+			font-size: 2em;
+			line-height: 1;
+			width: auto;
+			padding-right: 0;
+		}
+			.node-type-tour .title-table,
+	.node-type-tour-stop-group .title-table {
+		margin-top: 20px;
+		margin-bottom: 40px;
+	}
+}
+
+
+@media screen and (max-width: 660px) {	
+	body { font-size: 14px; }
+	.region-header { 
+		padding: 10px 0; 
+		position: relative;
+		height: 40px;
+		transition: all ease .5s;
+		-webkit-transition: all ease .5s;
+	}
+		.main-logo .logo-wrapper {
+			display: block;
+			text-align:center;
+		}
+		#header #logo { 
+			width: 100% !important;
+			text-align: center;
+			display: inline-block;
+			margin: 0;
+			padding: 0;
+		}
+		.sprite--umma-dialogues {
+			height: 16px;
+			width: 165px;
+			background-position: 0px 68px;
+			background-size: 257px;
+			margin-top: -2px;
+		}
+		.sprite--many-voices {
+			height: 40px;
+			width: 185px;
+			background-position: 0px 40px;
+			background-size: 255px;
+			margin-top: -18px;
+		}
+	a.menu-link {
+		display: block;
+		color: white;
+		padding: 15px 50px 15px 25px;
+		font-size: 1.5em;
+	}
+		a.menu-link--child {
+			padding-left: 40px;
+		}
+	
+	.show-hide--code {
+		top: 0px;
+		right: 10px;
+	}
+	.show-hide--menu {
+		top: 0px;
+		left: 10px;
+	}
+	.header-spacer {
+		height: 0;
+	}
+	.keypad-wrapper {
+		z-index: 3;
+		left: 0;
+		margin: 0;
+	}
+		.keypad-display {
+			padding: .2em .35em;
+			font-size: 2em;
+		}
+		.keypad-form {
+			position: static;
+			width: 100%;
+			text-align: center;
+			padding: 3px 0;
+		}
+	.show-hide { display: block !important; }
+
+	#main .block-title {
+		margin-top: 0px;
+	}
+	#main .view-tour-resources {
+		margin-top: 0;
+	}
+	#main .tour-resource:first-child {
+		margin-top: 0;
+	}
+	.featured-tour {
+		height: 180px;
+	}
+		.featured-tour__title {
+			font-size: 2em;
+		}
+	.front-page--explore {
+		font-size: 2em;
+		margin: 0;
+	}
+	.level-selection li {
+        margin-right: 1%;
+    }
+	.level__block {
+		display: none;
+	}
+}
+@media screen and (max-width: 530px) {
+	.explore-block {
+		width: 100%;
+		float: none;
+	}
+	.explore-block--left {
+		margin-right: 0;
+	}
+	.explore-block--right {
+		margin-left: 0;
+	}
+}
+
+
+
+/*   =============================      UTILITIES      =============================    */
+
+.invisible { visibility: hidden; }
+.hidden { display: none !important; }
+.ajax-progress-throbber { display: none; }
+/*Hide admin tabs for anonymous users*/
+.not-logged-in .tabs-wrapper, .not-logged-in #tap-export-tourml-form {
+	display: none;
+}
+.no-shadow {
+	box-shadow: none !important;
+}

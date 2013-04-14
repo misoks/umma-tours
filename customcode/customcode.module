@@ -1,107 +1,179 @@
 <?php
 
-// Return a particular number to prefix the reference code for each specific content type
-
-function check_content_type($node) {
-	// Resources
-		if ($node->type =='tour_audio_stop') {
-			$prefix = '10';
-		}
-		elseif ($node->type =='geo_stop') {
-			$prefix = '11';
-		}
-		elseif ($node->type =='tour_image_stop') {
-			$prefix = '12';
-		}
-		elseif ($node->type =='information_stop') {
-			$prefix = '13';
-		}
-		elseif ($node->type =='poll_stop') {
-			$prefix = '14';
-		}
-		elseif ($node->type =='website_stop') {
-			$prefix = '15';
-		}
-		elseif ($node->type =='tour_video_stop') {
-			$prefix = '16';
-		}
-	// Resource Sets
-		elseif ($node->type == 'tour_stop_group') {
-			$prefix = '4';
-		}
-	// Objects
-		elseif ($node->type == 'object_info') {
-			$prefix = '7';
-		}
-	// Object Sets
-		elseif ($node->type == 'object_set') {
-			$prefix = '2';
-		}
-	// Tours
-		elseif ($node->type == 'tour') {
-			$prefix = '5';
-		}
-	// Tour Sets
-		elseif ($node->type == 'tour_set') {
-			$prefix = '6';
-		}
-	return $prefix;
+/*======================================================================================
+	Find location code within an array and return the TID for that gallery term within 
+	the Galleries vocabulary.
+  =====================================================================================*/
+  
+function get_location($code) {
+	$locations = array(
+	
+		//FIRST LEVEL
+		"AMH-116" => "559", //Forum
+		"AMH-101" => "561", //European & American Art
+		"AMH-109" => "561", //European & American Art
+		"AMH-111" => "561", //European & American Art
+		"AMH-110" => "561", //European & American Art
+		"AMH-115" => "560", //New Media Gallery
+		"AMH-RAN" => "562", //European Art (1100-1650)
+		"AMH-DAV" => "563", //European Art (1650-1850)
+		"FFW-FOR" => "559", //Forum
+		"FFW-121" => "559", //Forum
+		"FFW-125" => "556", //MultiPurpose Room
+		"FFW-126" => "538", //Vertical Gallery
+		"FFW-COM" => "554", //Commons
+		"FFW-132" => "554", //Commons
+		"FFW-STE" => "557", //Project Gallery
+		"FFW-124" => "557", //Project Gallery
+		"FFW-132" => "538", //Vertical Gallery
+		
+		//SECOND LEVEL
+		"AMH-TB1" => "547", //Temporary Exhibitions (Alumni Memorial Hall)
+		"AMH-201" => "551", //American Decorative Art
+		"AMH-211" => "551", //American Decorative Art
+		"AMH-JAC" => "548", //Conservation Lab
+		"AMH-202" => "551", //American Decorative Art
+		"AMH-MOS" => "550", //Open Storage
+		"AMH-BRE" => "549", //European & American Art
+		"AMH-209" => "549", //European & American Art
+		"FFW-TB2" => "552", //Temporary Exhibitions (Frankel Wing)
+		"FFW-BOH" => "546", //African Art
+		"FFW-216" => "545", //Japanese Art
+		"FFW-217" => "544", //South & Southeast Asian Art
+		"FFW-214" => "538", //Vertical Gallery
+		"FFW-218" => "543", //Buddhist Art
+		"FFW-219" => "538", //Vertical Gallery
+		
+		//MEZZANINE
+		"FFW-M00" => "537", //Modern and Contemporary Art
+		"FFW-M01" => "537", //Modern and Contemporary Art
+		"FFW-M02" => "537", //Modern and Contemporary Art
+		"FFW-M04" => "537", //Modern and Contemporary Art
+		"FFW-BRA" => "537", //Modern and Contemporary Art
+		"FFW-CHA" => "539", //Chinese Art
+		"FFW-LEE" => "540", //Korean Art
+		
+		//LOWER LEVEL
+		"FFW-035" => "567", //Museum Studies Program
+		"FFW-036" => "567", //Museum Studies Program
+		"FFW-SAW" => "567", //Museum Studies Program
+		"FFW-CRC" => "571", //Curatorial Research Center
+		"FFW-049" => "570", //Classroom
+		"FFW-050" => "569", //Object Study
+		"FFW-RUB" => "568", //Paper Study
+		"FFW-AUD" => "565", //Auditorium
+		
+		//OUTDOOR
+		"FFW-TAP" => "4386", //Outdoor
+		"FFW-ENC" => "4386", //Outdoor
+		"FFW-TIC" => "4386", //Outdoor
+		"FFW-S08" => "4386", //Outdoor
+		"FFW-S9A" => "4386", //Outdoor
+		"FFW-S9B" => "4386", //Outdoor
+		"FFW-2BR" => "4386", //Outdoor
+		"FFW-OUT" => "4386"  //Outdoor
+	);
+	return $locations[$code];
 }
 
-// Function for updating a pre-existing node
+
+/*======================================================================================
+	Returns a particular number to prefix the reference code for each specific content 
+	type. These are also used when finding the appropriate path when a code is entered
+	via the keypad.
+  =====================================================================================*/
+  
+function get_prefix($node) {
+	$type = $node->type;
+	$prefixes = array(
+		//Resources
+		'tour_audio_stop' => '10',
+		'geo_stop' => '11',
+		'tour_image_stop' => '12',
+		'information_stop' => '13',
+		'poll_stop' => '14',
+		'website_stop' => '15',
+		'tour_video_stop' => '16',
+		// Objects
+		'object_info' => '7',
+		// Object Sets
+		'object_set' => '2',
+		// Resource Sets
+		'tour_stop_group' => '4',
+		// Tours
+		'tour' => '5',
+		// Tour Sets
+		'tour_set' => '6',
+		'stop' => '0',
+		'url_bundle' => '0',
+		'url_forwarder' => '0',
+		'webform' => '0',
+		'page' => '0'
+	);
+	return $prefixes[$type];
+}
+
+
+/*======================================================================================
+	Combines the content type prefix with the serial number to generate a node's 
+	unique code. The serial numbers are unique to each content type.
+  =====================================================================================*/
+
+function process_code($node) {
+
+	$prefix = get_prefix($node);
+	//$field = field_get_items('node', $node, "field_serial");
+	if ($prefix !== '0') {
+		//$serial = $node->field_serial['und'][0]['value'];
+		$serial = $node->lnid;
+		//Combine the auto-increment value with the prefix and put it into the code field
+		$node->field_code['und'][0]['value'] = $prefix.$serial;
+	}
+}
+
+
+/*======================================================================================
+	Interpreting and assigning the gallery location of each object based on the codes
+	that come out of EmbARK.
+  =====================================================================================*/
+
+function process_location($node) {
+	if ($node->type == 'object_info') {
+		$field = field_get_items('node', $node, "field_location_code");
+		if($field) {
+			//Pull the imported (often messy) location code from its temp field
+			$code_long = $node->field_location_code['und'][0]['value'];
+			
+			//Chop it down to the right size
+			$code = substr($code_long, 0, 7);
+			
+			//Get its corresponding gallery tid from the array
+			$tid = get_location($code);
+			
+			if(empty($tid) == FALSE ) {
+				//Assign that gallery to the Location field
+				$node->field_location['und'][0]['tid'] = $tid;
+			}
+		}
+	}
+}
+
+
+// Implementation of hook_node_update()
 function customcode_node_update($node) {
-    $field = field_get_items('node', $node, 'field_unique_code');
-    if ($field) {
-        //Get prefix for this node's content type
-        $prefix = check_content_type($node);
-    
-        //Get the unique auto-increment value for this node
-        $increment = $node->field_unique_code['und'][0]['value'];
-    
-        //Combine the auto-increment value with the prefix and put it into the code field
-        $node->field_code['und'][0]['value'] = $prefix.$increment;
-    
-        field_attach_update('node', $node);
-    }
+
+	process_code($node);
+	process_location($node);
+	
+	field_attach_update('node', $node);
+	
 }
 
-//Function for creating a new node
+// Implementation of hook_node_insert()
+
 function customcode_node_insert($node) {
-	$field = field_get_items('node', $node, 'field_unique_code');
-	if ($field) {
-        //Get prefix for this node's content type
-        $prefix = check_content_type($node);
-    
-        //Get the unique auto-increment value for this node
-        $increment = $node->field_unique_code['und'][0]['value'];
-    
-        //Combine the auto-increment value with the prefix and put it into the code field
-        $node->field_code['und'][0]['value'] = $prefix.$increment;
-    
-        field_attach_insert('node', $node);
-    }
+	
+	process_code($node);
+	process_location($node);
+
 }
-/*
-function customcode_taxonomy_term_update($term) {
-	// Galleries
-	if ($term->vid == '5') {
-		$prefix = '3';
-	}
-	else {
-		$prefix = "99";
-	}
-	$increment = $term->field_unique_code['und'][0]['value'];
-    $term->field_code['und'][0]['value'] = $prefix.$increment;
-    field_attach_update('term', $term);
-}
-function customcode_taxonomy_term_insert($term) {
-	if ($term->vid == '5') {
-		$prefix = '3';
-	}
-	else {
-		$prefix = "99";
-	}
-	$increment = $term->field_unique_code['und'][0]['value'];
-    $term->field_code['und'][0]['value'] = $prefix.$increment;
-    field_attach_insert('term', $term);
-}*/

@@ -62,10 +62,16 @@
 	<div class="region region-header">
 		<div class="content-width">
 			<span id="logo" class="main-logo">
+				<span class="logo-wrapper">
 			  <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
-				<img src="/sites/all/themes/custommobile/images/logo.svg" alt="UMMA Tours">
-				<!--<img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>" />-->
+				<img class= "sprite sprite--umma-dialogues" src="/sites/all/themes/custommobile/images/dot.gif" alt="UMMA Dialogues, University of Michigan Museum of Art">
 			  </a>
+			  </span>
+			  <span class="logo-wrapper">
+			  <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>">
+			  	<img class= "sprite sprite--many-voices" src="/sites/all/themes/custommobile/images/dot.gif" alt="Many Voices">
+			  </a>
+			  </span>
 			  </span>
 			<?php if ($site_name || $site_slogan): ?>
 			  <hgroup id="site-name-slogan">
@@ -80,33 +86,22 @@
 			  </hgroup>
 			<?php endif; ?>
     		<?php print render($page['header']); ?>
-    		<img class="show-hide show-hide--menu list collapsed" alt="Show Main Menu" title="Show Main Menu" src="/sites/all/themes/custommobile/images/dot.gif">
-    		<img class="show-hide show-hide--code pad collapsed" alt="Show Stop Code Field" title="Show Stop Code Field" src="/sites/all/themes/custommobile/images/dot.gif">
+    		<img class="sprite show-hide show-hide--menu list collapsed" alt="Show Main Menu" title="Show Main Menu" src="/sites/all/themes/custommobile/images/dot.gif">
+    		<img class="sprite show-hide show-hide--code pad collapsed" alt="Show Stop Code Field" title="Show Stop Code Field" src="/sites/all/themes/custommobile/images/dot.gif">
 		</div>
 	</div>
 	    
-	<div class="header-spacer"></div>
 	<div id="keypad-wrapper" class="keypad-wrapper content-width hidden">
 		<form method="post" class="keypad-form">
 			<!--<a name="Keypad" class="key-show-hide pad">Keypad</a>-->
-			<input class="keypad-display" type="number" pattern="[0-9]*" name="code"/></input>
+			<span class="keypad-label">Enter code:</span> <input class="keypad-display" type="number" pattern="[0-9]*" name="code" value="00000" onclick="if(this.value == '00000') {this.value=''; this.className +=' clicked'}"/></input>
 			<input type="submit" value="Go" class="code-submit">
 		</form>
 	</div>
     <?php if ($main_menu || $secondary_menu || !empty($page['navigation'])): ?>
-      <nav id="navigation" role="navigation" class="nav-region clearfix">
-
-      
+      <nav id="navigation" role="navigation" class="nav-region clearfix content-width">
         <?php if (!empty($page['navigation'])): ?> <!--if block in navigation region, override $main_menu and $secondary_menu-->
-          <?php print render($title_prefix); ?>
-    		<?php if ($title): ?>
-				<table>
-					<tr><td class="nav-title-container content-width">
-						<h1 class="page-title"><?php print $title; ?></h1>
-					</td></tr>
-				</table>
-    		<?php endif; ?>
-   		 <?php print render($title_suffix); ?>
+          
           <?php print render($page['navigation']); ?>
         <?php endif; ?>
         <?php if (empty($page['navigation'])): ?>
@@ -142,17 +137,24 @@
 
 <div class="page-body">
 	<div class="content-width">
-	<?php print render($title_prefix); ?>
-    		<?php if ($title): ?>
-    			<table class="page-title">
-    				<tr><td class="title-icon-cell"><img src="/sites/all/themes/custommobile/images/dot.gif" class="sprite sprite--stop-type--l"></td>
-    				<td class="title-cell"><h1 class="page-title__resource-title"><?php print $title; ?></h1></td></tr>
-    			</table>
-    		<?php endif; ?>
-   	<?php print render($title_suffix); ?>
+	<div class="search-box-alt">
+		  <?php print render(drupal_get_form('search_block_form')); ?>
+	</div>
+	
   <section id="main" role="main" class="clearfix main-content">
     <?php print $messages; ?>
-    <?php if ($page['highlighted']): ?><div id="highlighted"><?php print render($page['highlighted']); ?></div><?php endif; ?>
+    	<div id="highlighted" class="highlighted">
+    	<?php print render($page['highlighted']); ?>
+    		<?php print render($title_prefix); ?>
+    		<?php if ($title): ?>
+    			<table class="title-table">
+    				<tr><td class="title-icon-cell"><img src="/sites/all/themes/custommobile/images/dot.gif" class="sprite sprite--stop-type--l"></td>
+    				<td class="title-cell"><h1 class="page-title"><?php print $title; ?></h1></td></tr>
+    			</table>
+   	<?php print render($title_suffix); ?>
+    		
+    	</div>
+    <?php endif; ?>
     <?php if (!empty($tabs['#primary'])): ?><div class="tabs-wrapper clearfix"><?php print render($tabs); ?></div><?php endif; ?>
     <?php print render($page['help']); ?>
     <?php if ($action_links): ?><ul class="action-links"><?php print render($action_links); ?></ul><?php endif; ?>

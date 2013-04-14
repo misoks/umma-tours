@@ -22,10 +22,7 @@
 </head>
 
 <body class="<?php print $classes; 	
-				$url = 'http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'];
-				if (false !== strpos($url,'resource') OR false !== strpos($url,'stop')) {
-    				print ' resource-page';
-    			} 
+
     ?>" <?php print $attributes;?>>
   <?php print $page_top; ?>
   <?php print $page; ?>

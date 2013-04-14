@@ -1,0 +1,13 @@
+<?php
+function customcode_install() {
+  $weight = db_select('system', 's')
+              ->fields('s', array('weight'))
+              ->condition('name', 'type_local_nids', '=')
+              ->execute()
+              ->fetchField();
+
+  db_update('system')
+    ->fields(array('weight' => $weight +1))
+    ->condition('name', 'customcode', '=')
+    ->execute();
+}
