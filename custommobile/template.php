@@ -107,6 +107,21 @@ function custommobile_process_block(&$variables, $hook) {
 /**
  * Changes the search form to use the "search" input element of HTML5.
  */
-function custommobile_preprocess_search_block_form(&$vars) {
-  $vars['search_form'] = str_replace('type="text"', 'type="search"', $vars['search_form']);
+function custommobile_preprocess_search_block_form(&$variables) {
+  $variables['search_form'] = str_replace('type="text"', 'type="search"', $variables['search_form']);
+}
+
+
+/**
+ * Resets the Search page title so it's not 'Home'
+ */
+function custommobile_preprocess_page(&$variables, $hook) {
+	if(arg(0) == "search") {
+        $variables['title'] = 'Search';
+    }
+}
+function custommobile_preprocess_html(&$variables, $hook) {
+	if(arg(0) == "search") {
+		$variables['head_title_array']['title'] = 'Search';
+    }
 }

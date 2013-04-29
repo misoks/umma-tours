@@ -34,6 +34,7 @@ function get_location($code) {
 		"AMH-JAC" => "548", //Conservation Lab
 		"AMH-202" => "551", //American Decorative Art
 		"AMH-MOS" => "550", //Open Storage
+		"AHM-MOS" => "550", //Open Storage (Typo)
 		"AMH-BRE" => "549", //European & American Art
 		"AMH-209" => "549", //European & American Art
 		"FFW-TB2" => "552", //Temporary Exhibitions (Frankel Wing)
@@ -71,7 +72,8 @@ function get_location($code) {
 		"FFW-S9A" => "4386", //Outdoor
 		"FFW-S9B" => "4386", //Outdoor
 		"FFW-2BR" => "4386", //Outdoor
-		"FFW-OUT" => "4386"  //Outdoor
+		"FFW-OUT" => "4386", //Outdoor
+		"AMH-OUT" => "4386"  //Outdoor
 	);
 	return $locations[$code];
 }
@@ -122,9 +124,7 @@ function get_prefix($node) {
 function process_code($node) {
 
 	$prefix = get_prefix($node);
-	//$field = field_get_items('node', $node, "field_serial");
 	if ($prefix !== '0') {
-		//$serial = $node->field_serial['und'][0]['value'];
 		$serial = $node->lnid;
 		//Combine the auto-increment value with the prefix and put it into the code field
 		$node->field_code['und'][0]['value'] = $prefix.$serial;
@@ -141,6 +141,9 @@ function process_location($node) {
 	if ($node->type == 'object_info') {
 		$field = field_get_items('node', $node, "field_location_code");
 		if($field) {
+			//Set the object as On Display
+			$node->field_on_display['und'][0]['value'] = 1;
+		
 			//Pull the imported (often messy) location code from its temp field
 			$code_long = $node->field_location_code['und'][0]['value'];
 			
@@ -150,7 +153,7 @@ function process_location($node) {
 			//Get its corresponding gallery tid from the array
 			$tid = get_location($code);
 			
-			if(empty($tid) == FALSE ) {
+			if(!empty($tid)) {
 				//Assign that gallery to the Location field
 				$node->field_location['und'][0]['tid'] = $tid;
 			}

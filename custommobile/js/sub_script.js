@@ -1,21 +1,40 @@
 $(document).ready(function() {
-	MBP.hideUrlBarOnLoad;
+	
+	/* On page load housekeeping -------------------------------------------------------*/
+	
+	// Hide URL bar on load
+	setTimeout(function(){
+    	window.scrollTo(0, 0);
+    }, 0);
+	
+	// Turn on JS styling
+	$('body').removeClass('no-js');
+	$('#no-js--code-link').removeAttr("href");
+	
+	// Remove default size from video player so it can be styled by sub_style.css
+	$('.video-js').attr('style','');
+	$('.video-js').attr('width','auto');
+	$('.video-js').attr('height','auto');
+	
+	// Hide drop-down menu and keypad
 	$('.keypad-form').hide();
-	
 	$('.main-nav-menu').hide();
-	$('.main-nav-menu').removeClass('invisible');
 	
-	$('.keypad-wrapper').removeClass('hidden');
+	// Make the keypad drop-down visible
+	$('#keypad-wrapper').removeClass('hidden');
 	
+	// Too lazy to add this in the pager template, so I put it here
 	$('.pager').addClass('clearfix');
 	
+	// Expand advanced search options for docents
 	$('.search-advanced').removeClass('collapsed');
 	
-	if ($('body').hasClass('logged-in')) {
-		$('.description--body').hide();
-		$('.body-expander').addClass('closed');
-		$('.body-expander').removeClass('open');
-	}
+	// Set initial values in search and code fields
+	$('#edit-search-block-form--2').attr('value','Search');
+	$('#edit-search-block-form--2').addClass('form-initial');
+	$('.keypad-display').attr('value','00000');
+	
+	// Give all resource content types the 'resource-page' class
 	if (($('body').hasClass('node-type-tour-audio-stop')) ||
 		($('body').hasClass('node-type-tour-video-stop')) ||
 		($('body').hasClass('node-type-tour-image-stop')) ||
@@ -26,6 +45,20 @@ $(document).ready(function() {
 		($('body').hasClass('node-type-object-info'))) {
 			$('body').addClass('resource-page');
 	}
+	
+	/* Interactive functions  ----------------------------------------------------------*/
+	
+	// Empty fields with initial values on click
+	$('#edit-search-block-form--2').click(function() {
+		var input = '#edit-search-block-form--2';
+		form_click(input);
+	});
+	$('.keypad-display').click(function() {
+		var input = '.keypad-display';
+		form_click(input);
+	});
+	
+	// Hide and show the Enter Code box
 	$('.show-hide--code').click(function() {
 		if ($(this).hasClass('collapsed')) {
 			$('.keypad-form').slideDown("fast");
@@ -42,6 +75,8 @@ $(document).ready(function() {
 			$(this).attr('title','Show Stop Code Field');
 		}	
 	});
+	
+	// Hide and show the main menu
 	$('.show-hide--menu').click(function() {
 		if ($(this).hasClass('collapsed')) {
 			$('.main-nav-menu').slideDown("fast");
@@ -58,31 +93,10 @@ $(document).ready(function() {
 			$(this).attr('title','Show Main Menu');
 		}	
 	});
-	$('.menu-link--expandable').click(function() {
-		if ($(this).hasClass('collapsed')) {
-			$(this).next('ul').slideDown('fast');
-			$(this).addClass('expanded');
-			$(this).removeClass('collapsed');
-		}
-		else {
-			$(this).next('ul').slideUp('fast');
-			$(this).addClass('collapsed');
-			$(this).removeClass('expanded');
-		}
-	});
-	$('.body-expander').click(function() {
-		$('.description--body').toggle();
-		if ($('.body-expander').hasClass('open')) {
-			$(this).addClass('closed');
-			$(this).removeClass('open');
-		}
-		else {
-			$(this).addClass('open');
-			$(this).removeClass('closed');
-		}
-	});
 	
-	
+	/*  When using in-page navigation, this connects 'inter-nav' links with their associated
+		HTML elements. Links with the 'inter-nav' class should have IDs that match their
+		associated blocks. Those blocks should have the class 'level--[linkID]' */
 	$(".inter-nav").click(function() {
 		var current_id = $(this).attr('id');
 		new_id = '.level--' + current_id;
@@ -91,17 +105,31 @@ $(document).ready(function() {
 		}, 1000);
 	});
 	
+	// Special 'inter-nav' link for scrolling back to the top of the page
 	$(".inter-nav-top").click(function() {
 	   $('html, body').animate({scrollTop:0}, 1000);
 		return false;
 	});
-	
+
 });
 
-window.addEventListener("load",function() {
-   setTimeout(function(){
-    window.scrollTo(0, 0);
-    }, 0);
+$(window).load(function() {
+	/* Some more housekeeping for styling the video player. Hides the placeholder image
+	   on click. */
+	$('.vjs-big-play-button').click(function() {
+		$('.video-js').removeClass('video-initial');
+		$('#video-placeholder-image').hide();
+	});
+	$('.video-js').click(function() {
+		$(this).removeClass('video-initial');
+		$('#video-placeholder-image').hide();
+	});
 });
 
-	
+// Little function for clearing initial values out of fields
+function form_click(input) {
+	if ($(input).hasClass('form-initial')) {
+		$(input).attr('value', '');
+		$(input).addClass('clicked').removeClass('form-initial');
+	}
+}

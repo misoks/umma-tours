@@ -1,51 +1,51 @@
 <?php
-	if (ISSET($_POST['code'])) {
-		$code = $_POST['code'];
-		$type = $code[0];
-		if ($type == '1') {
-			$sub_type = $code[1];
-			if ($sub_type == '0') {
-				$path = 'resource/audio';
-			}
-			elseif ($sub_type == '1') {
-				$path = 'resource/geographic';
-			}
-			elseif ($sub_type == '2') {
-				$path = 'resource/image';
-			}
-			elseif ($sub_type == '3') {
-				$path = 'resource/information';
-			}
-			elseif ($sub_type == '4') {
-				$path = 'resource/poll';
-			}
-			elseif ($sub_type == '5') {
-				$path = 'resource/website';
-			}
-			elseif ($sub_type == '6') {
-				$path = 'resource/video';
-			}
+if (ISSET($_POST['code'])) {
+	$code = $_POST['code'];
+	$type = $code[0];
+	if ($type == '1') {
+		$sub_type = $code[1];
+		if ($sub_type == '0') {
+			$path = 'resource/audio';
 		}
-		elseif ($type == '2') {
-			$path = 'object-set';
+		elseif ($sub_type == '1') {
+			$path = 'resource/geographic';
 		}
-		elseif ($type == '3') {
-			$path = 'galleries';
+		elseif ($sub_type == '2') {
+			$path = 'resource/image';
 		}
-		elseif ($type == '4') {
-			$path = 'resource-set';
+		elseif ($sub_type == '3') {
+			$path = 'resource/information';
 		}
-		elseif ($type == '5') {
-			$path = 'tours';
+		elseif ($sub_type == '4') {
+			$path = 'resource/poll';
 		}
-		elseif ($type == '6') {
-			$path = 'tour-set';
+		elseif ($sub_type == '5') {
+			$path = 'resource/website';
 		}
-		elseif ($type == '7') {
-			$path = 'object';
+		elseif ($sub_type == '6') {
+			$path = 'resource/video';
 		}
-		header( "Location: http://tap.ummaintra.net/$path/$code" ) ;
 	}
+	elseif ($type == '2') {
+		$path = 'object-set';
+	}
+	elseif ($type == '3') {
+		$path = 'galleries';
+	}
+	elseif ($type == '4') {
+		$path = 'docent-tours';
+	}
+	elseif ($type == '5') {
+		$path = 'tours';
+	}
+	elseif ($type == '6') {
+		$path = 'tour-set';
+	}
+	elseif ($type == '7') {
+		$path = 'object';
+	}
+	header( "Location: http://tap.ummaintra.net/$path/$code" ) ;
+}
 ?>
 
 <div id="container" class="clearfix body-container">
@@ -87,17 +87,13 @@
 			<?php endif; ?>
     		<?php print render($page['header']); ?>
     		<img class="sprite show-hide show-hide--menu list collapsed" alt="Show Main Menu" title="Show Main Menu" src="/sites/all/themes/custommobile/images/dot.gif">
-    		<img class="sprite show-hide show-hide--code pad collapsed" alt="Show Stop Code Field" title="Show Stop Code Field" src="/sites/all/themes/custommobile/images/dot.gif">
+    		<a href="/enter-code.php" id="no-js--code-link">
+    			<img class="sprite show-hide show-hide--code pad collapsed" alt="Show Stop Code Field" title="Show Stop Code Field" src="/sites/all/themes/custommobile/images/dot.gif">
+    		</a>
 		</div>
 	</div>
 	    
-	<div id="keypad-wrapper" class="keypad-wrapper content-width hidden">
-		<form method="post" class="keypad-form">
-			<!--<a name="Keypad" class="key-show-hide pad">Keypad</a>-->
-			<span class="keypad-label">Enter code:</span> <input class="keypad-display" type="number" pattern="[0-9]*" name="code" value="00000" onclick="if(this.value == '00000') {this.value=''; this.className +=' clicked'}"/></input>
-			<input type="submit" value="Go" class="code-submit">
-		</form>
-	</div>
+	
     <?php if ($main_menu || $secondary_menu || !empty($page['navigation'])): ?>
       <nav id="navigation" role="navigation" class="nav-region clearfix content-width">
         <?php if (!empty($page['navigation'])): ?> <!--if block in navigation region, override $main_menu and $secondary_menu-->
@@ -130,16 +126,19 @@
             ),
           )); ?>
         <?php endif; ?>
+        
+        <div id="keypad-wrapper" class="keypad-wrapper content-width hidden">
+			<form method="post" class="keypad-form">
+				<span class="keypad-label">Enter code:</span> <input class="keypad-display form-initial" type="number" pattern="[0-9]*" name="code"/></input>
+				<input type="submit" value="Go" class="code-submit">
+			</form>
+		</div><!-- /#keypad -->
       </nav> <!-- /#navigation -->
     <?php endif; ?>
-    <?php if ($breadcrumb): print $breadcrumb; endif;?>
   </header> <!-- /#header -->
 
 <div class="page-body">
 	<div class="content-width">
-	<div class="search-box-alt">
-		  <?php print render(drupal_get_form('search_block_form')); ?>
-	</div>
 	
   <section id="main" role="main" class="clearfix main-content">
     <?php print $messages; ?>

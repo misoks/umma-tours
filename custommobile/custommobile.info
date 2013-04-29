@@ -1,5 +1,5 @@
-name = custommobile
-description = Mobile-enabled sub-theme based on Framework for the TAP site.
+name = UMMA Custom Mobile
+description = Mobile-enabled sub-theme based on Framework for the Many Voices system.
 base theme = framework
 screenshot  = images/screenshot.png
 favicon = favicon.png
@@ -8,6 +8,7 @@ engine = phptemplate
 
 stylesheets[all][] = css/taf-swissface-l.css
 stylesheets[all][] = css/sub_style.css
+stylesheets[all][] = css/shame.css
 
 regions[header]         = Header
 regions[navigation]     = Navigation
